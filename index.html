@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Offline converters and utilities for IT, OT, cybersecurity, IoT and Industry 4.0." />
+    <meta name="theme-color" content="#07111f" />
+    <title>ForgeTools | Engineering Utility Suite</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#home" aria-label="ForgeTools home"><span class="brand-mark">F</span><span>Forge<span>Tools</span></span></a>
+      <label class="search"><span>⌕</span><input id="tool-search" type="search" placeholder="Search tools..." autocomplete="off" /><kbd>⌘K</kbd></label>
+      <nav id="tool-nav" aria-label="Tool navigation"></nav>
+      <div class="sidebar-footer"><span class="status-dot"></span> Runs locally in your browser</div>
+    </aside>
+    <main>
+      <header class="topbar"><button class="mobile-menu" id="menu-button" aria-label="Open menu">☰</button><div id="crumb">Dashboard</div><div class="topbar-actions"><button id="theme-button" class="icon-button" title="Toggle theme">◐</button><a class="github-link" href="https://github.com/marceloasl99" target="_blank" rel="noreferrer">GitHub ↗</a></div></header>
+      <section id="app" class="app" aria-live="polite"></section>
+    </main>
+    <template id="dashboard-template">
+      <section class="hero"><div><p class="eyebrow">ENGINEERING UTILITY SUITE</p><h1>Practical tools for the systems that keep the world moving.</h1><p>Fast, private utilities for IT operations, industrial networks, cyber defense, IoT deployments, and everyday engineering.</p></div><div class="hero-stat"><strong id="tool-count">0</strong><span>offline tools</span></div></section>
+      <section id="dashboard" class="dashboard"></section>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>
