@@ -2,15 +2,26 @@
 
 > Offline-first converters and practical utilities for IT, OT, IoT, cybersecurity, and Industry 4.0.
 
-ForgeTools is an original, dependency-free web application designed for technicians, developers, engineers, and operations teams. It keeps common calculations and transformations private: every included tool runs locally in the browser, with no account, telemetry, or server required.
+ForgeTools is an original, dependency-free web application designed for technicians, developers, engineers, analysts, and operations teams. It keeps common calculations and transformations private: every included tool runs locally in the browser, with no account, telemetry, or server required. Once opened from a web server, it can also be installed as a small Progressive Web App (PWA).
 
 ## Included tools
 
 | Domain | Tool | What it does |
 | --- | --- | --- |
 | Engineering | Unit Converter | Convert length, mass, pressure, flow, power, energy, data size, and temperature. |
+| Engineering | Ohm’s Law Calculator | Solve common voltage, current, resistance, and power relationships. |
+| Engineering | 4–20 mA Signal Converter | Scale a linear process value to or from an analog current loop. |
+| Science & Math | Scientific Calculator | Calculate arithmetic, trigonometry, roots, and logarithms. |
+| Science & Math | Statistics Calculator | Find mean, median, variance, standard deviation, and range. |
+| Science & Math | Number Base Converter | Translate binary, octal, decimal, and hexadecimal numbers. |
+| Science & Math | Molarity Calculator | Calculate solution molarity, amount of substance, or volume. |
+| Finance & Planning | Loan & Interest Calculator | Estimate payments, repayment total, and interest. |
+| Finance & Planning | Markup & Margin Calculator | Calculate selling price, gross profit, and gross margin. |
 | IT & Network | IPv4 Subnet Calculator | Find subnet masks, networks, broadcasts, usable hosts, and address ranges. |
+| IT & Network | UUID Generator | Create cryptographically random UUID v4 identifiers. |
+| IT & Network | JWT Decoder | Inspect JWT header and payload locally without signature verification. |
 | Cybersecurity | SHA Hash Generator | Generate SHA-256 and SHA-512 digests using Web Crypto. |
+| Cybersecurity | CRC-32 Checksum | Detect accidental changes in text payloads; not a cryptographic control. |
 | Cybersecurity | Password Generator | Create passwords with cryptographically secure browser randomness. |
 | IT & Network | JSON Formatter | Validate, pretty-print, and minify JSON locally. |
 | IT & Network | Timestamp Converter | Translate Unix timestamps, local date/time input, and UTC values. |
@@ -19,10 +30,10 @@ ForgeTools is an original, dependency-free web application designed for technici
 
 ## Features
 
-- Polished category dashboard inspired by the usability of modern tool collections, with an original visual system and codebase.
+- Polished category dashboard for engineering, finance, science, IT, OT/IoT, and cybersecurity workflows, with an original visual system and codebase.
 - Instant search (`Ctrl+K` / `Cmd+K`) and persistent favorites stored only in `localStorage`.
 - Responsive, dark-first interface that works on desktops, tablets, and phones.
-- Static HTML, CSS, and JavaScript: ideal for GitHub Pages and offline use.
+- Static HTML, CSS, and JavaScript, plus an optional service worker: ideal for GitHub Pages and offline use.
 - No build step and no third-party dependency.
 
 ## Run locally

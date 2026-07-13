@@ -1,0 +1,10 @@
+{
+  "name": "ForgeTools — Engineering Utility Suite",
+  "short_name": "ForgeTools",
+  "description": "Offline-first utilities for IT, OT, IoT, cybersecurity, engineering, science and finance.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "icons": [{ "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

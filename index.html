@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#07111f" />
     <title>ForgeTools | Engineering Utility Suite</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -25,5 +26,6 @@
       <section id="dashboard" class="dashboard"></section>
     </template>
     <script src="app.js"></script>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');</script>
   </body>
 </html>
