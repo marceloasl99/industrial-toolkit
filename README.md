@@ -171,7 +171,7 @@ industrial-toolkit/
 │   └── make-icons.mjs    # Regenerates the PNG icons (no dependencies)
 ├── package.json
 ├── CHANGELOG.md
-├── task.md
+├── task.md               # v1.x delivery checklist (outdated, see Status)
 ├── LICENSE
 └── README.md
 ```
@@ -224,6 +224,43 @@ npm run icons     # regenerate assets/icon-*.png
 1. Open the repository's **Settings → Pages**.
 2. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/ (root)`.
 3. Save. The site is published at `https://marceloasl99.github.io/industrial-toolkit/`.
+
+## Status
+
+**Version 2.0.0 (2026-10-30).** Released to `main`. Functional, but not fully validated: read the limitations below before relying on any tool for a production decision.
+
+### What has been verified
+
+- `npm test`: 29 of 29 test groups pass. They cover the `src/lib/` calculation modules, including RFC vectors for HOTP/TOTP and the CRC check values.
+- Headless Chromium: all 52 tools render with their default inputs, with no console errors and no error boxes.
+- Spot checks in the browser: scientific calculator (`sin(30) + sqrt(16) * 2` = 8.5), subnet details, Modbus RTU frame and CRC (`01 03 00 00 00 0A C5 CD`), CVSS vector for Log4Shell (9.8, Critical), PT100 at 100 °C (138.5 Ω), JWT warnings (`alg: none`, expired token).
+- Persistence: favourites do not clear the open tool's inputs; inputs are restored after reload; corrupted `localStorage` does not blank the app.
+
+### Known limitations
+
+- **Logic tested, UI not.** `src/tools/*` has no automated tests. Only the default inputs of each tool were exercised, plus the spot checks above. Edge cases in the UI (invalid combinations, empty fields, mode switches) are untested.
+- **X.509 parser is untested on real certificates.** `src/lib/x509.js` is a minimal DER reader. It has not been run against certificates from real CAs, and it does not check chains or signatures.
+- **Thermocouple coefficients** follow the NIST ITS-90 polynomials and were checked at a few points. They have not been compared against a full reference table.
+- **Industrial conventions are not validated on hardware.** Modbus reference-to-offset mapping, PLC address conversion (Schneider, Siemens, Allen-Bradley), NAMUR NE 43 thresholds and the serial-line timing are conventions. They need checking against your own devices and manuals.
+- **Password crack-time** is a rough offline-attack model (10¹⁰ guesses/s), not a security audit.
+- **Cron** uses the browser's local time zone. Daylight-saving transitions are not tested.
+- **Crypto availability.** Hash, HMAC, TOTP and file checksum use Web Crypto, which requires a secure context. Opening `index.html` from disk (`file://`) may disable these in some browsers; serve the folder over HTTP or HTTPS.
+- **Installation.** The service worker is disabled on `file://`. The PWA install flow and the new icons have not been tested on a real device, and the icons have not been reviewed visually.
+- **Browsers.** Tested only in headless Chromium. Firefox and Safari have not been checked.
+- **Language.** Navigation, tool names, descriptions and categories are bilingual. Tool labels, hints and error messages are in English. This README is in English only.
+- **Build and CI.** There is no linter, type checker or GitHub Actions workflow. Tests run only when someone runs `npm test`.
+- **Documentation.** `task.md` is the v1.x checklist and is not maintained.
+
+### Pending work
+
+1. Translate tool labels, hints and error messages to pt-BR (the `pt` field currently covers names and descriptions only).
+2. Add a GitHub Actions workflow that runs `npm test` on every push.
+3. Add behaviour tests for the tools (for example, with a headless browser script like the one used for QA).
+4. Validate the X.509 parser against real certificates and add the results as fixtures.
+5. Validate the Modbus, PLC and NAMUR conventions against at least one real device or a vendor manual.
+6. Review the generated icons visually and test the install flow on Android and desktop Chrome.
+7. Replace `task.md` with a current checklist, or remove it.
+8. Add a pt-BR version of this README.
 
 ## Licence
 
