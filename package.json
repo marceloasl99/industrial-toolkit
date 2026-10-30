@@ -1,0 +1,17 @@
+{
+  "name": "forge-tools",
+  "version": "2.0.0",
+  "description": "Offline-first engineering utility suite for IT, OT, IoT, cybersecurity and Industry 4.0. No dependencies, no build step.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "start": "python -m http.server 8080",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marceloasl99/industrial-toolkit.git"
+  }
+}

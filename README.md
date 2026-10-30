@@ -1,76 +1,234 @@
 # ForgeTools — Engineering Utility Suite
 
-> Offline-first converters and practical utilities for IT, OT, IoT, cybersecurity, and Industry 4.0.
+> 52 offline, browser-local converters, calculators and diagnostic tools for IT, OT, IoT, cybersecurity and Industry 4.0.
 
-ForgeTools is an original, dependency-free web application designed for technicians, developers, engineers, analysts, and operations teams. It keeps common calculations and transformations private: every included tool runs locally in the browser, with no account, telemetry, or server required. Once opened from a web server, it can also be installed as a small Progressive Web App (PWA).
+ForgeTools is an original, dependency-free web application for technicians, developers, engineers, analysts and operations teams. Every calculation runs in your browser: there is no account, no telemetry, no analytics and no server. Opened from any static host, it installs as a Progressive Web App and keeps working offline.
 
-## Included tools
+- **52 tools** across engineering, science, finance, IT & networking, cybersecurity and OT/IoT.
+- **Private by design.** Inputs never leave the page. Certificate, JWT, TOTP and file-checksum tools all run locally.
+- **Installable.** Add it to your home screen or desktop from the browser; it opens in its own window.
+- **Bilingual interface.** English and Português (Brasil), switched in *About & settings*. Tool names and descriptions are localised.
+- **No build step, no dependencies.** Plain HTML, CSS and ES modules. The unit tests use `node:test`, which ships with Node.
+- **Remembers your work.** Favourites, recent tools and the last inputs of each tool are kept in `localStorage` on your device only.
 
-| Domain | Tool | What it does |
+---
+
+## Quick start
+
+Open `index.html` in a modern browser, or serve the folder:
+
+```bash
+python -m http.server 8080
+# then visit http://localhost:8080
+```
+
+Requirements: a current evergreen browser (Chrome, Edge, Firefox, Safari). Running the unit tests requires Node.js 18 or newer.
+
+## Tools
+
+| Category | Tool | What it does |
 | --- | --- | --- |
-| Engineering | Unit Converter | Convert length, mass, pressure, flow, power, energy, data size, and temperature. |
-| Engineering | Ohm’s Law Calculator | Solve common voltage, current, resistance, and power relationships. |
-| Engineering | 4–20 mA Signal Converter | Scale a linear process value to or from an analog current loop. |
-| Science & Math | Scientific Calculator | Calculate arithmetic, trigonometry, roots, and logarithms. |
-| Science & Math | Statistics Calculator | Find mean, median, variance, standard deviation, and range. |
-| Science & Math | Number Base Converter | Translate binary, octal, decimal, and hexadecimal numbers. |
-| Science & Math | Molarity Calculator | Calculate solution molarity, amount of substance, or volume. |
-| Finance & Planning | Loan & Interest Calculator | Estimate payments, repayment total, and interest. |
-| Finance & Planning | Markup & Margin Calculator | Calculate selling price, gross profit, and gross margin. |
-| IT & Network | IPv4 Subnet Calculator | Find subnet masks, networks, broadcasts, usable hosts, and address ranges. |
-| IT & Network | UUID Generator | Create cryptographically random UUID v4 identifiers. |
-| IT & Network | JWT Decoder | Inspect JWT header and payload locally without signature verification. |
-| Cybersecurity | SHA Hash Generator | Generate SHA-256 and SHA-512 digests using Web Crypto. |
-| Cybersecurity | CRC-32 Checksum | Detect accidental changes in text payloads; not a cryptographic control. |
-| Cybersecurity | Password Generator | Create passwords with cryptographically secure browser randomness. |
-| IT & Network | JSON Formatter | Validate, pretty-print, and minify JSON locally. |
-| IT & Network | Timestamp Converter | Translate Unix timestamps, local date/time input, and UTC values. |
-| OT & IoT | Modbus Register Helper | Convert common reference labels into zero-based Modbus protocol offsets. |
-| OT & IoT | Base64 Encoder | UTF-8 safe text encoding and decoding for payloads and APIs. |
+| Engineering | Unit Converter | Length, mass, pressure, flow, power, energy, torque, speed, area and data. |
+| Engineering | Ohm’s Law Calculator | Solve voltage, current, resistance or power from any two known values. |
+| Engineering | 4–20 mA Signal Converter | Scale a process value to and from a 4–20 mA loop, with NAMUR NE 43 fault flags. |
+| Engineering | Linear Scaling | Map any raw range to engineering units: 0–10 V, 1–5 V, PLC raw counts, 12/16-bit ADC. |
+| Engineering | 4–20 mA Loop Budget | Check whether a supply voltage can drive a current loop through every resistor in series. |
+| Engineering | Cable Voltage Drop | Voltage drop and load voltage for copper or aluminium cable, DC or three-phase, with AWG support. |
+| Engineering | PT100 / PT1000 RTD | Convert RTD resistance to temperature and back (IEC 60751, Callendar–Van Dusen). |
+| Engineering | Thermocouple Converter | Type K, J, T, E, N: mV ↔ °C (NIST ITS-90) with cold-junction compensation. |
+| Engineering | Voltage Divider | Output voltage, divider current and resistor power for a two-resistor divider. |
+| Engineering | Resistor Colour Code | 4- and 5-band resistor colour codes to value and tolerance range. |
+| Engineering | Three-Phase Power | kW, kVA, kvar and line current from voltage, current and power factor; or the reverse from kW. |
+| Engineering | Motor Speed & Slip | Synchronous speed, slip and rotor frequency for an induction motor. |
+| Engineering | dB / dBm Converter | Convert dBm ↔ mW and power or voltage ratios ↔ dB (RF, wireless, link budgets). |
+| Engineering | Thermal Rise | Junction temperature rise from dissipated power and thermal resistance. |
+| Engineering | OEE Calculator | Overall Equipment Effectiveness: availability × performance × quality, with loss breakdown. |
+| Science & Math | Scientific Calculator | Arithmetic, trigonometry (degrees), roots, logarithms, factorial. Accepts × ÷ − π. |
+| Science & Math | Statistics Calculator | Mean, median, mode, quartiles, IQR, population and sample variance / standard deviation. |
+| Science & Math | Number Base Converter | Binary, octal, decimal and hexadecimal, with arbitrary precision and two’s complement. |
+| Science & Math | BCD & Gray Code | Decimal ↔ packed BCD and binary ↔ Gray code, used by encoders and older PLC I/O. |
+| Science & Math | Molarity Calculator | Molarity, moles or volume from the other two quantities (M = n / V). |
+| Finance & Planning | Loan & Amortisation | Monthly payment, total interest and a full amortisation schedule. |
+| Finance & Planning | Compound Growth | Future value of a principal with periodic contributions and compounding frequency. |
+| Finance & Planning | Markup & Margin | Selling price, gross profit, markup and gross margin; converts between markup and margin. |
+| IT & Network | IPv4 Subnet Calculator | Network, broadcast, host range, usable hosts, wildcard, class. Accepts 10.0.0.0/24 or a dotted mask. |
+| IT & Network | VLSM Planner | Allocate variable-length subnets for a list of host requirements inside one block. |
+| IT & Network | IPv6 Tools | Expand and compress IPv6, classify the address, and compute the subnet range. |
+| IT & Network | MAC Address Tool | Format MAC addresses, identify the vendor from the OUI, derive EUI-64, generate random ones. |
+| IT & Network | UUID Generator | Random UUID v4 (and time-ordered v7) with bulk generation, using secure browser randomness. |
+| IT & Network | JWT Decoder | Inspect header and payload, convert time claims, flag expiry and alg none. No signature verification. |
+| IT & Network | JSON Formatter | Validate, pretty-print, minify and sort keys, with the error position. |
+| IT & Network | Timestamp Converter | Unix seconds, milliseconds, microseconds or nanoseconds (auto-detected), ISO dates, UTC and local time. |
+| IT & Network | Cron Explainer | Explain a 5-field cron expression and list its next run times in local time. |
+| IT & Network | Regex Tester | Test a regular expression against text: matches, positions and capture groups. |
+| IT & Network | Text Diff | Line-by-line comparison of two texts or configurations, with optional whitespace tolerance. |
+| IT & Network | CSV ↔ JSON | Convert CSV to JSON and back, with RFC 4180 quoting and automatic delimiter detection. |
+| IT & Network | Transfer & IoT Data Budget | Transfer time for a file at a given link speed, and monthly data for a fleet of IoT devices. |
+| IT & Network | Certificate Inspector | Paste a PEM certificate: subject, issuer, validity, key type, SANs, CA flag. Runs locally. |
+| IT & Network | Base64 Encoder | UTF-8 safe Base64 and Base64url encoding and decoding for payloads and APIs. |
+| Cybersecurity | Hash Generator | SHA-1, SHA-256, SHA-384, SHA-512 of text, via Web Crypto. Hex and Base64 output. |
+| Cybersecurity | HMAC Generator | HMAC-SHA256/384/512 with a secret key; verify a provided signature. Useful for webhooks and API signing. |
+| Cybersecurity | File Checksum | Hash a local file (firmware, ISO, backup) with SHA-256/512 and CRC-32. Nothing is uploaded. |
+| Cybersecurity | Checksum Calculator | CRC-32, CRC-16 (Modbus, CCITT, XMODEM), CRC-8, LRC and XOR over text or hex bytes. |
+| Cybersecurity | Password & Passphrase | Unbiased random passwords and passphrases, with entropy and crack-time estimates. |
+| Cybersecurity | TOTP Code Generator | RFC 6238 one-time codes from a Base32 secret, for testing MFA integrations. Runs locally. |
+| Cybersecurity | CVSS 3.1 Calculator | Base score, severity and vector string from the eight CVSS 3.1 base metrics. Paste a vector to decode it. |
+| Cybersecurity | Hex Dump & Strings | xxd-style hex view of pasted bytes or text, string extraction and entropy. Good for firmware triage. |
+| OT & IoT | Modbus Register Helper | Reference numbers (40001, 400001) to zero-based protocol offsets, with range checks and the function code. |
+| OT & IoT | Modbus Frame Builder & Decoder | Build RTU/TCP request frames with CRC-16, or decode a hex frame and explain each field. |
+| OT & IoT | Register Type Converter | Two or four 16-bit registers ↔ float32, int32, uint32, float64. All four byte/word orders. |
+| OT & IoT | PLC Address Converter | Map Schneider %MW, Siemens DB/M/I/Q, Allen-Bradley N7/B3 addresses to Modbus references and back. |
+| OT & IoT | MQTT Topic Tester | Check MQTT filters and topics against wildcards (+ and #), validate syntax, decode Sparkplug B topics. |
+| OT & IoT | Serial Line Settings | Frame time, character time and Modbus RTU silent interval for a given baud rate and framing. |
+
+Use the search box (or `Ctrl+K` / `⌘K`, or `/`) to find a tool by name, description or tag: searching *PLC*, *CLP*, *subnet*, *senha* or *modbus* finds the right tool even when the wording differs.
 
 ## Features
 
-- Polished category dashboard for engineering, finance, science, IT, OT/IoT, and cybersecurity workflows, with an original visual system and codebase.
-- Instant search (`Ctrl+K` / `Cmd+K`) and persistent favorites stored only in `localStorage`.
-- Responsive, dark-first interface that works on desktops, tablets, and phones.
-- Static HTML, CSS, and JavaScript, plus an optional service worker: ideal for GitHub Pages and offline use.
-- No build step and no third-party dependency.
+### Navigation and workflow
+- **Dashboard** grouped by category, with a hero summary and search across names, descriptions and tags.
+- **Favourites** (★) pinned at the top of the sidebar, and **Recent** tools for quick return.
+- **Hash routing.** Every tool has its own link (`#/modbus`, `#/network`…), so you can bookmark or share a specific tool. Browser Back and Forward work.
+- **Remembered inputs.** Each tool restores what you last typed, so a 4–20 mA scaling or a subnet plan is still there after a reload.
+- **Live results.** Results update as you type; `Ctrl/⌘ + Enter` forces a recalculation.
+- **Clear errors.** Invalid input shows a message explaining what to fix, instead of a blank or `NaN` result.
 
-## Run locally
+### Appearance and accessibility
+- Theme: follow the system, or force dark or light (`Ctrl/⌘ + Shift + L` cycles them).
+- Compact mode hides the hero and descriptions for dense dashboards and tablets in the field.
+- Keyboard-operable cards and controls with visible focus rings; skip-link; ARIA labels on icon-only buttons.
+- Responsive layout down to phone width with no horizontal scrolling.
 
-Download or clone the repository and open `index.html` in a modern browser. For the closest production behavior, serve the folder with any static server.
+### Data and privacy
+- **Export / import** all favourites and settings as a single JSON file, to move your setup between machines.
+- **Reset** clears favourites, recents, saved inputs and settings.
+- Nothing is sent over the network. Fonts are system fonts; the only request is for the app's own files.
 
-```bash
-# Example with Python, if installed
-python -m http.server 8080
-```
+### Offline and installation
+- A service worker precaches the shell and serves cached files immediately (stale-while-revalidate), so the app loads without a connection.
+- When a new version is deployed, a banner offers to reload. Old caches are removed automatically.
+- The web manifest provides 192 and 512 px PNG icons (including a maskable icon) and shortcuts to Modbus, Subnet, 4–20 mA and Units.
 
-Then visit `http://localhost:8080`.
+## Notes on accuracy
 
-## Publish with GitHub Pages
+These tools are aids for engineering judgement, not substitutes for a standard, a datasheet or a commissioning procedure.
 
-1. Create a GitHub repository named `forge-tools` under `marceloasl99`.
-2. Upload the contents of this project to the repository root.
-3. Open **Settings → Pages**.
-4. Under **Build and deployment**, select **Deploy from a branch**, choose `main`, then `/ (root)`.
-5. Save. GitHub will publish the static site at `https://marceloasl99.github.io/forge-tools/`.
+- **Modbus addresses.** Reference numbers are one-based; protocol offsets are zero-based. Device manuals differ in whether they use 5-digit (`40001`) or 6-digit (`400001`) notation, and some gateways remap addresses. Verify before writing to a controller.
+- **PLC address mappings** (Schneider, Siemens, Allen-Bradley → Modbus) depend on gateway and memory configuration. The tool shows the convention it assumes.
+- **NAMUR NE 43** fault and saturation thresholds are shown for information. Your transmitter's configuration governs the actual alarm behaviour.
+- **Thermocouples** use the NIST ITS-90 inverse polynomials. Cold-junction compensation assumes the reference junction temperature you enter.
+- **CVSS** implements the FIRST CVSS v3.1 base-score equations. Temporal and environmental metrics are not included.
+- **TOTP, JWT and certificate tools** are for testing and inspection. The JWT decoder does not verify signatures. Do not paste production secrets, MFA seeds or private keys into any web page, including this one.
+- **Password strength** estimates assume an offline attack at 10¹⁰ guesses per second against a fast hash. Real risk depends on the hashing scheme used by the system that stores the password.
+- **Cron** is evaluated in your browser's local time zone. Daylight-saving transitions follow the browser's calendar.
+- **Subnets.** `/31` links use two usable addresses (RFC 3021); `/32` is a single host. The IPv4 and VLSM tools reject octets with leading zeros, which some systems read as octal.
 
-## Safety note
-
-This project is intended for productivity, education, and operational support. Always validate conversions and industrial protocol address conventions against the relevant equipment manual and your organization’s procedures before applying a value in production.
+Always validate conversions and protocol conventions against the relevant equipment manual and your organisation's procedures before applying a value in production.
 
 ## Project structure
 
 ```text
-forge-tools/
-├── index.html       # App shell and accessible templates
-├── styles.css       # Responsive design system and components
-├── app.js           # Tool registry, UI, and browser-only logic
-├── assets/favicon.svg
+industrial-toolkit/
+├── index.html            # App shell: sidebar, topbar, router target
+├── styles.css            # Design tokens (light/dark), components, responsive rules
+├── manifest.json         # PWA manifest: icons, shortcuts, colours
+├── sw.js                 # Service worker (versioned cache, stale-while-revalidate)
+├── assets/
+│   ├── favicon.svg
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── icon-512-maskable.png
+├── src/
+│   ├── app.js            # Router, navigation, search, favourites, recents, settings, PWA hooks
+│   ├── ui.js             # Shared UI helpers: form fields, results, tables, copy, download, mount()
+│   ├── i18n.js           # English and pt-BR strings, localised tool metadata
+│   ├── storage.js        # Guarded localStorage (namespaced keys, export/import)
+│   ├── version.js        # Single source of truth for the app version
+│   ├── tools/            # One module per category; each exports tool definitions
+│   │   ├── index.js      # Registry: builds the tool list and checks for duplicate ids
+│   │   ├── engineering.js
+│   │   ├── science.js
+│   │   ├── finance.js
+│   │   ├── it.js
+│   │   ├── security.js
+│   │   └── ot.js
+│   └── lib/              # Pure, DOM-free logic (fully unit-tested)
+│       ├── expr.js       # Safe expression evaluator (shunting-yard, no eval)
+│       ├── ipv4.js       # Subnetting, VLSM, parsing
+│       ├── ipv6.js       # Parsing, RFC 5952 compression, subnets (BigInt)
+│       ├── modbus.js     # References, function codes, RTU/TCP frames, exception codes
+│       ├── registers.js  # 16-bit words ↔ float32/int32/uint32/float64 with byte/word order
+│       ├── crc.js        # CRC-32, CRC-16 variants, CRC-8, LRC, XOR
+│       ├── thermocouple.js, rtd.js, scaling.js, electrical.js, units.js
+│       ├── cvss.js, totp.js, password.js, x509.js, hexdump.js
+│       ├── cron.js, timestamp.js, mqtt.js, plc.js, mac.js, jwt.js
+│       ├── finance.js, stats.js, base.js, base64.js, csv.js, diff.js
+│       ├── oee.js, bandwidth.js, number.js
+│       └── …
+├── tests/
+│   └── lib.test.js       # 29 test groups covering the lib/ modules
+├── scripts/
+│   └── make-icons.mjs    # Regenerates the PNG icons (no dependencies)
+├── package.json
+├── CHANGELOG.md
+├── task.md
 ├── LICENSE
 └── README.md
 ```
 
-## License
+Design rule: **`src/lib/` never touches the DOM.** Every calculation is a plain function that takes numbers or strings and returns plain data, which is what makes it testable. The `src/tools/` modules only wire inputs to those functions and render the results.
 
-MIT © 2026 Marcelo A. S. L.
+## Development
+
+```bash
+npm test          # runs node --test (unit tests for src/lib)
+npm start         # static server on port 8080
+npm run icons     # regenerate assets/icon-*.png
+```
+
+### Adding a tool
+
+1. Put the calculation in `src/lib/<topic>.js` as a pure function and add tests to `tests/lib.test.js`.
+2. Add a tool object to the matching file in `src/tools/`:
+
+   ```js
+   {
+     id: 'my-tool', icon: '◎', name: 'My Tool', category: 'OT & IoT',
+     tags: ['keyword', 'synonym'],                       // extra search terms, any language
+     description: 'One sentence in English.',
+     pt: { name: 'Meu utilitário', description: 'Uma frase em português.' },
+     render(root) {
+       mount(root, {
+         html: field({ id: 'x', label: 'Input', type: 'number', value: 1 }) + details('out', 2),
+         calc(q) { renderDetails(q('#out'), [['Result', String(num(q('#x').value) * 2)]]); },
+       });
+     },
+   }
+   ```
+
+3. Ids must be unique; `src/tools/index.js` throws at load time if they are not.
+4. Keep the same category names in English, and translate them in `categoryPt` inside `src/app.js`.
+
+`mount()` runs `calc` once on render, re-runs it on input changes, shows any thrown error in a message box, and handles copy buttons (`copyButton('out-id')`). Inputs are persisted automatically unless marked `persist: false` (for example, sample data that should always reset).
+
+## Releasing
+
+1. Update `src/version.js` and `package.json`.
+2. Bump `CACHE_VERSION` in `sw.js` (keep it equal to the app version). Old caches are removed on activation.
+3. Add an entry to `CHANGELOG.md`.
+4. Run `npm test` and load the app once from a local server to check the console is clean.
+5. Commit, tag, and push. GitHub Pages serves the new version; installed copies update on their next visit.
+
+## Publish with GitHub Pages
+
+1. Open the repository's **Settings → Pages**.
+2. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/ (root)`.
+3. Save. The site is published at `https://marceloasl99.github.io/industrial-toolkit/`.
+
+## Licence
+
+MIT © 2026 Marcelo A. S. L. See [LICENSE](LICENSE).
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
